@@ -1,0 +1,53 @@
+<?php echo $this->render('header.phtml'); ?>
+<h1><?php echo $this->escape($this->title); ?></h1>
+<table border=1>
+<tr>
+<?php foreach ($this->vehicleArray as $column => $value) { ?>
+<td><?php echo " $column\n";?></th>
+<td><?php echo " $value\n";?></th>
+</tr>
+<?php } ?>
+</table>
+</br>
+</br>
+<form action="<?php echo $this->baseUrl ?>/comment/" method="post">
+<?php
+if (isset ($this->name)){
+?>
+Name:<input type="text" name="name" value="<?php echo $this->name;?>"  >
+<?php
+}
+else {
+?>
+Name:<input type="text" name="name">
+<?php
+}
+?>
+<br /> 
+Comment:
+<br />
+<textarea name="comment" cols="30" rows="10"></textarea>
+<br />
+<input type="hidden" name="page_id" value="vehicle_<?php echo $this->id ?>" >
+<input type="submit" value="Leave" >
+</form>
+</br>
+<?php if ($this->countComment > "0"){
+?>
+<table border=1>
+	<tr>
+		<th>Name</th>
+		<th>Comment</th>
+		<th>Time</th>
+	</tr>	
+	<?php for ($rowIndex=0;$rowIndex<(($this->countComment));$rowIndex++){ 	 ?>
+	<tr>
+		<td><?php echo $this->commentArray[$rowIndex]["user"];?></td>
+		<td><?php echo $this->commentArray[$rowIndex]["comment"];?></td>
+		<td><?php echo $this->commentArray[$rowIndex]["time"];?></td>		
+	</tr>
+	<?php } ?>
+</table>
+<?php 
+}
+echo $this->render('footer.phtml'); ?>

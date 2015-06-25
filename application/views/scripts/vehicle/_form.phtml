@@ -1,0 +1,46 @@
+<form action="<?php echo $this->baseUrl ?>/vehicle/<?php echo $this->action; ?>" method="post">
+<div>
+<label for="model">Marka:</label>
+<input type="text" name="marka"
+value="<?php echo $this->escape(trim($this->vehicle->marka));?>"/>
+</div>
+<div>
+<label for="model">Model:</label>
+<input type="text" name="model"
+value="<?php echo $this->escape(trim($this->vehicle->model));?>"/>
+</div>
+<div>
+<label for="rik">Rik:</label>
+<input type="text" name="rik"
+value="<?php echo $this->escape(trim($this->vehicle->rik));?>"/>
+</div>
+<div>
+<label for="color">Color:</label>
+<input type="text" name="color"
+value="<?php echo $this->escape(trim($this->vehicle->color));?>"/>
+</div>
+<div>
+<label for="registration_number	">Registration Number:</label>
+<input type="text" name="registration_number"
+value="<?php echo $this->escape(trim($this->vehicle->registration_number));?>"/>
+</div>
+<div>
+<label for="owner">Owner:</label>
+<input type="text" name="owner"
+value="<?php echo $this->escape(trim($this->vehicle->owner));?>"/>
+</div>
+<div>
+<label for="owner_phone">Owner phone:</label>
+<input type="text" name="owner_phone"
+value="<?php echo $this->escape(trim($this->vehicle->owner_phone));?>"/>
+</div>
+<label for="owner_address">Owner address:</label>
+<input type="text" name="owner_address"
+value="<?php echo $this->escape(trim($this->vehicle->owner_address));?>"/>
+</div>
+<div id="formbutton">
+<input type="hidden" name="id" value="<?php echo $this->vehicle->id; ?>" />
+<input type="submit" name="add"
+value="<?php echo $this->escape($this->buttonText); ?>" />
+</div>
+</form>

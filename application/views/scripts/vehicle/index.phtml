@@ -1,0 +1,137 @@
+<?php echo $this->render('header.phtml'); ?>
+Hello user <?php echo $this->escape($this->name);?>                 
+<?php if ($this->permission == "1"){
+?>
+<a href="<?php echo $this->baseUrl; ?>/users">User administration</a>
+<?php
+}
+?>
+<h1><?php echo $this->escape($this->title); ?></h1>
+<p><a href="<?php echo $this->baseUrl; ?>/vehicle/add">Add Vehicle</a></p>
+<table border=1 style="width:100%">
+	<tr>
+		<th style="background-color:#ECECEC;"
+	onMouseOver="this.style.backgroundColor='yellow';"
+	onMouseOut="this.style.backgroundColor='#ECECEC'"
+	onclick="location.href='<?php echo $this->baseUrl; ?>/vehicle/index/sortBy/<?php echo "id";?>'">ID</th>
+		<th style="background-color:#ECECEC;"
+	onMouseOver="this.style.backgroundColor='yellow';"
+	onMouseOut="this.style.backgroundColor='#ECECEC'"
+	onclick="location.href='<?php echo $this->baseUrl; ?>/vehicle/index/sortBy/<?php echo "marka";?>'">marka</th>
+		<th style="background-color:#ECECEC;"
+	onMouseOver="this.style.backgroundColor='yellow';"
+	onMouseOut="this.style.backgroundColor='#ECECEC'"
+	onclick="location.href='<?php echo $this->baseUrl; ?>/vehicle/index/sortBy/<?php echo "model";?>'">model</th>
+		<th style="background-color:#ECECEC;"
+	onMouseOver="this.style.backgroundColor='yellow';"
+	onMouseOut="this.style.backgroundColor='#ECECEC'"
+	onclick="location.href='<?php echo $this->baseUrl; ?>/vehicle/index/sortBy/<?php echo "rik";?>'">rik</th>
+		<th style="background-color:#ECECEC;"
+	onMouseOver="this.style.backgroundColor='yellow';"
+	onMouseOut="this.style.backgroundColor='#ECECEC'"
+	onclick="location.href='<?php echo $this->baseUrl; ?>/vehicle/index/sortBy/<?php echo "color";?>'">color</th>
+		<th style="background-color:#ECECEC;"
+	onMouseOver="this.style.backgroundColor='yellow';"
+	onMouseOut="this.style.backgroundColor='#ECECEC'"
+	onclick="location.href='<?php echo $this->baseUrl; ?>/vehicle/index/sortBy/<?php echo "registration_number";?>'">registration_number</th>
+		<th style="background-color:#ECECEC;"
+	onMouseOver="this.style.backgroundColor='yellow';"
+	onMouseOut="this.style.backgroundColor='#ECECEC'"
+	onclick="location.href='<?php echo $this->baseUrl; ?>/vehicle/index/sortBy/<?php echo "owner";?>'">owner</th>
+		<th style="background-color:#ECECEC;"
+	onMouseOver="this.style.backgroundColor='yellow';"
+	onMouseOut="this.style.backgroundColor='#ECECEC'"
+	onclick="location.href='<?php echo $this->baseUrl; ?>/vehicle/index/sortBy/<?php echo "owner_phone";?>'">owner_phone</th>
+		<th style="background-color:#ECECEC;"
+	onMouseOver="this.style.backgroundColor='yellow';"
+	onMouseOut="this.style.backgroundColor='#ECECEC'"
+	onclick="location.href='<?php echo $this->baseUrl; ?>/vehicle/index/sortBy/<?php echo "owner_address";?>'">owner_address</th>
+		<th style="background-color:#ECECEC;"
+	onMouseOver="this.style.backgroundColor='yellow';"
+	onMouseOut="this.style.backgroundColor='#ECECEC'"
+	onclick="location.href='<?php echo $this->baseUrl; ?>/vehicle/index/sortBy/<?php echo "user";?>'">user</th>
+		<th style="background-color:#ECECEC;"
+	onMouseOver="this.style.backgroundColor='yellow';"
+	onMouseOut="this.style.backgroundColor='#ECECEC'"
+	onclick="location.href='<?php echo $this->baseUrl; ?>/vehicle/index/sortBy/<?php echo "added";?>'">added</th>
+		<th> </th>
+	</tr>
+	<?php foreach($this->paginator as $record) : ?>
+	<tr	style="background-color:#ECECEC;"
+	onMouseOver="this.style.backgroundColor='green';"
+	onMouseOut="this.style.backgroundColor='#ECECEC'"
+	onclick="location.href='<?php echo $this->baseUrl; ?>/vehicle/info/id/<?php echo $record->id;?>'">
+		<td><?php echo $this->escape($record->id);?></td>
+		<td><?php echo $this->escape($record->marka);?></td>
+		<td><?php echo $this->escape($record->model);?></td>
+		<td><?php echo $this->escape($record->rik);?></td>
+		<td><?php echo $this->escape($record->color);?></td>
+		<td><?php echo $this->escape($record->registration_number);?></td>
+		<td><?php echo $this->escape($record->owner);?></td>
+		<td><?php echo $this->escape($record->owner_phone);?></td>
+		<td><?php echo $this->escape($record->owner_address);?></td>
+		<td><?php echo $this->escape($record->user);?></td>
+		<td><?php echo $this->escape($record->owner_phone);?></td>
+		<td>
+		<a href="<?php echo $this->baseUrl; ?>/vehicle/edit/id/<?php echo $record->id;?>">Edit</a>
+		<a href="<?php echo $this->baseUrl; ?>/vehicle/delete/id/<?php echo $record->id;?>">Delete</a>
+		</td>
+	</tr>
+	<?php endforeach; ?>
+</table>
+<?= $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?>
+</br>
+
+<form action="<?php echo $this->baseUrl ?>/vehicle/index/search/" method="post">
+Search:<input type="text" name="search">
+<input type="submit" value="Search" >
+</form>
+</br>
+
+
+
+
+<form action="<?php echo $this->baseUrl ?>/comment/" method="post">
+<?php
+if (isset ($this->name)){
+?>
+Name:<input type="text" name="name" value="<?php echo $this->name;?>"  >
+<?php
+}
+else {
+?>
+Name:<input type="text" name="name">
+<?php
+}
+?>
+<br /> 
+Comment:
+<br />
+<textarea name="comment" cols="30" rows="10"></textarea>
+<br />
+<input type="hidden" name="page_id" value="main" >
+<input type="submit" value="Leave" >
+
+</form>
+</br>
+<?php if ($this->countComment > "0"){
+?>
+<table border=1 style="width:100%">
+	<tr>
+		<th>Name</th>
+		<th>Comment</th>
+		<th>Time</th>
+	</tr>
+	
+	<?php for ($rowIndex=0;$rowIndex<(($this->countComment));$rowIndex++){ 	 ?>
+	<tr>
+		<td><?php echo $this->commentArray[$rowIndex]["user"];?></td>
+		<td><?php echo $this->commentArray[$rowIndex]["comment"];?></td>
+		<td><?php echo $this->commentArray[$rowIndex]["time"];?></td>		
+	</tr>
+	<?php } ?>
+</table>
+
+<?php 
+}
+echo $this->render('footer.phtml'); ?>

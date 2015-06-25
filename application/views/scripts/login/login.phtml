@@ -1,0 +1,22 @@
+<?php echo $this->render('header.phtml'); ?>
+<h1><?php echo $this->escape($this->title); ?></h1>
+<?php if(!empty($this->message)) :?>
+<div id="message">
+<?php echo $this->escape($this->message);?>
+</div>
+<?php endif; ?>
+<form action="<?php echo $this->baseUrl ?>/login/login" method="post">
+<div>
+    <label for="username">Name</label>
+    <input type="text" name="name" value=""/>
+</div>
+<div>
+    <label for="password">Password</label>
+    <input type="password" name="pass" value=""/>
+</div>
+<div id="formbutton">
+<input type="submit" name="login" value="Login" />
+</div>
+</form>
+<a href="<?php echo $this->baseUrl; ?>/register">Registration</a>
+<?php echo $this->render('footer.phtml'); ?>
